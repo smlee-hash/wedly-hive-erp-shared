@@ -61,5 +61,21 @@ export function formatDateTime(isoDate: string | null): string {
   }
 }
 
+/**
+ * 시간 차이를 사람말 형식으로 ("방금 전" / "5분 전" / "3시간 전" / 그 이상은 날짜 시각)
+ * 히스토리·코멘트 패널 등에서 공통 사용.
+ */
+export function timeAgo(iso: string): string {
+  try {
+    const ms = Date.now() - new Date(iso).getTime();
+    if (ms < 60_000) return "방금 전";
+    if (ms < 3_600_000) return `${Math.floor(ms / 60_000)}분 전`;
+    if (ms < 86_400_000) return `${Math.floor(ms / 3_600_000)}시간 전`;
+    return formatDateTime(iso);
+  } catch {
+    return iso;
+  }
+}
+
 // STATUS_COLORS 같은 도메인 데이터는 보관함에 두지 않음. 각 앱의 _components/utils.ts 에 정의.
 // 부품에서 상태 색상이 필요하면 props 로 statusColors 를 받아 전달한다.

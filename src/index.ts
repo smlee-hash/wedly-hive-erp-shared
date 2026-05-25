@@ -52,4 +52,4 @@ export { FieldRowAdminMenu, SectionAdminMenu } from "./components/AdminMenus";
 export { DraggableFieldsSection } from "./components/DraggableFieldsSection";
 export type { OrderableField, DraggableFieldsSectionProps } from "./components/DraggableFieldsSection";
 
-export const __MODULE_VERSION__ = "0.11.0";
+export const __MODULE_VERSION__ = "0.12.0";
