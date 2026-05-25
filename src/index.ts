@@ -56,4 +56,4 @@ export type { OrderableField, DraggableFieldsSectionProps } from "./components/D
 export { SectionEditorAddModal, SectionEditorDeleteConfirm } from "./components/SectionEditorModal";
 export type { SectionKind, SectionEditorAddPayload } from "./components/SectionEditorModal";
 
-export const __MODULE_VERSION__ = "0.14.0";
+export const __MODULE_VERSION__ = "0.14.1";

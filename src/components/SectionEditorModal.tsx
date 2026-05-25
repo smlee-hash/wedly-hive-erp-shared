@@ -32,8 +32,17 @@ const KIND_OPTIONS: Array<{ value: SectionKind; label: string; description: stri
 function slugifyLabel(label: string): string {
   const ascii = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (ascii) return ascii;
-  // 한글 / 기호만 → 임의 id (시간 기반 5자리)
-  return `sec-${Date.now().toString(36).slice(-5)}`;
+  // 한글 / 기호만 → 임의 id (충돌 방지: 시간 기반 + 짧은 random)
+  // 같은 초에 두 번 만들어도 random 으로 분기.
+  let rand = "";
+  if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+    const arr = new Uint8Array(3);
+    crypto.getRandomValues(arr);
+    rand = Array.from(arr).map((b) => b.toString(36).padStart(2, "0")).join("").slice(0, 4);
+  } else {
+    rand = Math.floor(Math.random() * 1e6).toString(36).slice(0, 4);
+  }
+  return `sec-${Date.now().toString(36).slice(-4)}-${rand}`;
 }
 
 export function SectionEditorAddModal({
@@ -168,6 +177,7 @@ export function SectionEditorDeleteConfirm({
   open,
   sectionLabel,
   hasContent,
+  otherSectionHidden = false,
   onClose,
   onConfirm,
 }: {
@@ -175,6 +185,8 @@ export function SectionEditorDeleteConfirm({
   sectionLabel: string;
   /** 이 섹션에 컬럼이 들어 있는지 — true 면 사용자에게 더 강한 경고 */
   hasContent: boolean;
+  /** 현재 "기타" 섹션이 숨김 상태인지 — true 면 옮겨진 컬럼을 못 본다는 추가 안내 */
+  otherSectionHidden?: boolean;
   onClose: () => void;
   onConfirm: () => void;
 }) {
@@ -193,6 +205,11 @@ export function SectionEditorDeleteConfirm({
           {hasContent && (
             <p className="text-[12px] text-wedly-orange bg-wedly-bg-yellow/50 border border-wedly-orange/30 rounded-lg p-2">
               이 섹션 안 컬럼들은 자동으로 &apos;기타&apos; 섹션으로 옮겨집니다.
+              {otherSectionHidden && (
+                <span className="block mt-1 text-wedly-red font-medium">
+                  ⚠️ 현재 기타 섹션이 숨김 상태입니다. 옮겨진 컬럼을 보려면 섹션 편집 메뉴에서 &apos;기타 섹션 노출&apos; 을 켜세요.
+                </span>
+              )}
             </p>
           )}
           <p className="text-[12px] text-wedly-muted">삭제 후 다시 만들 수 있습니다.</p>
