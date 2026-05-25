@@ -61,16 +61,5 @@ export function formatDateTime(isoDate: string | null): string {
   }
 }
 
-export const STATUS_COLORS: Record<string, string> = {
-  "가망": "bg-wedly-bg-purple text-wedly-purple",
-  "상담예정": "bg-wedly-bg-blue text-wedly-accent",
-  "상담완료": "bg-wedly-bg-blue text-wedly-accent",
-  "계약대기": "bg-wedly-bg-yellow text-wedly-orange",
-  "계약완료": "bg-wedly-bg-green text-wedly-green",
-  "입금완료": "bg-wedly-bg-green text-wedly-green",
-  "정산완료": "bg-wedly-bg-green text-wedly-green",
-  "환불": "bg-wedly-bg-red text-wedly-red",
-  "계약보류": "bg-wedly-bg-yellow text-wedly-orange",
-  "계약취하": "bg-wedly-bg-red text-wedly-red",
-  "계약불가": "bg-wedly-bg-gray text-wedly-muted",
-};
+// STATUS_COLORS 같은 도메인 데이터는 보관함에 두지 않음. 각 앱의 _components/utils.ts 에 정의.
+// 부품에서 상태 색상이 필요하면 props 로 statusColors 를 받아 전달한다.

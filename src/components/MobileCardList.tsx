@@ -10,8 +10,7 @@
 
 import { cn } from "../lib/cn";
 import type { ColumnDef } from "../types/columns";
-import { formatDate, STATUS_COLORS } from "../lib/utils";
-import { getOptionColorClass } from "../lib/options";
+import { formatDate } from "../lib/utils";
 
 // SubsidyClient.tsx 내부 타입과 동일하게 유지
 type RowData = Record<string, string | number | boolean | null>;
@@ -31,6 +30,9 @@ type Props = {
   getConditionalFormatClass: (row: RowData) => string | null;
   // 컬럼 라벨
   getColLabel: (col: ColumnDef) => string;
+  // 도메인 — 상태 컬럼 키 + 상태값 색상 클래스 함수 (앱이 직접 전달)
+  statusKey: string;
+  getStatusClass: (status: string) => string;
   // 빈/오류 상태 메시지
   error: string | null;
   searchQuery: string;
@@ -45,6 +47,8 @@ export function MobileCardList({
   openRow,
   getConditionalFormatClass,
   getColLabel,
+  statusKey,
+  getStatusClass,
   error,
   searchQuery,
 }: Props) {
@@ -57,8 +61,8 @@ export function MobileCardList({
         </div>
       ) : (
         pagedData.map((row, idx) => {
-          const status = typeof row["05경정계약진행상태"] === "string" ? row["05경정계약진행상태"] : "";
-          const statusColor = getOptionColorClass(status, STATUS_COLORS);
+          const status = typeof row[statusKey] === "string" ? (row[statusKey] as string) : "";
+          const statusColor = getStatusClass(status);
           const cfClass = getConditionalFormatClass(row);
           return (
             <div
