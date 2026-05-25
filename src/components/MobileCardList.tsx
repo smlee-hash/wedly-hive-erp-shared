@@ -33,6 +33,10 @@ type Props = {
   // 도메인 — 상태 컬럼 키 + 상태값 색상 클래스 함수 (앱이 직접 전달)
   statusKey: string;
   getStatusClass: (status: string) => string;
+  // 도메인 — 카드 머리/꼬리 칸에 표시할 컬럼 키 (회사명·대표자명·연락처 등 어떤 키가 들어갈지)
+  titleKey: string;
+  subtitleLeftKey: string;
+  subtitleRightKey: string;
   // 빈/오류 상태 메시지
   error: string | null;
   searchQuery: string;
@@ -49,6 +53,9 @@ export function MobileCardList({
   getColLabel,
   statusKey,
   getStatusClass,
+  titleKey,
+  subtitleLeftKey,
+  subtitleRightKey,
   error,
   searchQuery,
 }: Props) {
@@ -76,7 +83,7 @@ export function MobileCardList({
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1.5 min-w-0 flex-1">
                   <span className="font-semibold text-sm text-wedly-t1 truncate">
-                    {String(row["02상호명"] || "-")}
+                    {String(row[titleKey] || "-")}
                   </span>
                   <button
                     onClick={(e) => {
@@ -101,9 +108,9 @@ export function MobileCardList({
                 )}
               </div>
               <div className="flex items-center justify-between text-xs text-wedly-muted">
-                <span>{typeof row["03대표자명"] === "string" ? row["03대표자명"] : "-"}</span>
+                <span>{typeof row[subtitleLeftKey] === "string" ? (row[subtitleLeftKey] as string) : "-"}</span>
                 <span className="text-wedly-t2">
-                  {typeof row["04연락처"] === "string" ? row["04연락처"] : "-"}
+                  {typeof row[subtitleRightKey] === "string" ? (row[subtitleRightKey] as string) : "-"}
                 </span>
               </div>
               {mobileCardFields.length > 0 && (() => {
