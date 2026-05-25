@@ -31,4 +31,8 @@ export { TopControls } from "./components/TopControls";
 // 표 셀 입력기 (글자·숫자·날짜) — Select 입력기는 도메인 의존성으로 각 앱이 자체 정의
 export { CellTextEditor, CellNumberEditor, CellDateEditor } from "./components/CellEditors";
 
-export const __MODULE_VERSION__ = "0.6.0";
+// 공통 모달 — 일괄 수정, 자동 입력 규칙
+export { default as BulkEditModal } from "./components/BulkEditModal";
+export { default as AutoFillRulesModal } from "./components/AutoFillRulesModal";
+
+export const __MODULE_VERSION__ = "0.7.0";
