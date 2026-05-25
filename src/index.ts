@@ -28,14 +28,21 @@ export { DesktopTable } from "./components/DesktopTable";
 
 export { TopControls } from "./components/TopControls";
 
-// 표 셀 입력기 (글자·숫자·날짜) — Select 입력기는 도메인 의존성으로 각 앱이 자체 정의
-export { CellTextEditor, CellNumberEditor, CellDateEditor } from "./components/CellEditors";
+// 글자·숫자·날짜 입력기 — 표 셀과 상세 모달 양쪽이 같은 부품 사용
+// (AGENTS.md §5-4 cell-detail-parity — 두 화면 100% 동일).
+// 날짜 입력기는 onClose 가 있으면 표 셀용(portal), 없으면 상세 모달용(인라인).
+// CellTextEditor/CellNumberEditor/CellDateEditor 는 같은 부품의 별칭.
+export {
+  TextEditor,
+  NumberEditor,
+  DateEditor,
+  CellTextEditor,
+  CellNumberEditor,
+  CellDateEditor,
+} from "./components/Editors";
 
 // 공통 모달 — 일괄 수정, 자동 입력 규칙
 export { default as BulkEditModal } from "./components/BulkEditModal";
 export { default as AutoFillRulesModal } from "./components/AutoFillRulesModal";
 
-// 상세 모달 안 입력기 (글자·숫자·날짜) — Select·MultiPerson 은 도메인 의존성으로 각 앱 정의
-export { TextEditor, NumberEditor, DateEditor } from "./components/DetailEditors";
-
-export const __MODULE_VERSION__ = "0.8.0";
+export const __MODULE_VERSION__ = "0.9.0";
