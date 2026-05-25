@@ -161,6 +161,7 @@ export function SectionAdminMenu({
   onAddSection,
   onDeleteSection,
   canDeleteSection = false,
+  onManagePanels,
 }: {
   sectionId: string;
   sectionLabel: string;
@@ -185,6 +186,8 @@ export function SectionAdminMenu({
   onDeleteSection?: () => void;
   /** 이 섹션을 삭제할 수 있는지 — 기본 섹션은 false */
   canDeleteSection?: boolean;
+  /** "상위 패널 관리" 클릭 시 호출 — 부모가 PanelManagerModal 띄움 */
+  onManagePanels?: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -225,8 +228,8 @@ export function SectionAdminMenu({
                 : "border-wedly-bd text-wedly-t2 hover:bg-wedly-bg-gray hover:text-wedly-t1"
             )
         }
-        title="섹션 편집"
-        aria-label="섹션 편집"
+        title="탭 편집 (섹션·패널)"
+        aria-label="탭 편집"
       >
         {compact ? (
           <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
@@ -239,7 +242,7 @@ export function SectionAdminMenu({
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
               <path d="M11.5 2L14 4.5L5.5 13L2 14L3 10.5L11.5 2Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
             </svg>
-            섹션 편집
+            탭 편집
             <svg width="8" height="8" viewBox="0 0 12 12" fill="none" className={cn("transition-transform", open && "rotate-180")}>
               <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -328,6 +331,25 @@ export function SectionAdminMenu({
               </svg>
               컬럼 순서 초기화
             </button>
+          )}
+          {onManagePanels && (
+            <>
+              <div className="px-3 py-1.5 mt-1 text-[10px] font-semibold text-wedly-muted uppercase tracking-wider border-t border-wedly-bd/60">
+                상위 패널
+              </div>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onManagePanels(); setOpen(false); }}
+                className="w-full px-3 py-1.5 text-[12px] text-left text-wedly-t2 hover:bg-wedly-bg-blue/40 hover:text-wedly-accent transition flex items-center gap-2"
+                title="상위 패널 추가·이름수정·삭제"
+              >
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="3" width="12" height="3" rx="1" stroke="currentColor" strokeWidth="1.3" />
+                  <rect x="2" y="8" width="12" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+                </svg>
+                상위 패널 관리
+              </button>
+            </>
           )}
           {(onAddSection || onDeleteSection || onToggleOtherSection) && (
             <div className="px-3 py-1.5 mt-1 text-[10px] font-semibold text-wedly-muted uppercase tracking-wider border-t border-wedly-bd/60">
