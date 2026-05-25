@@ -45,4 +45,7 @@ export {
 export { default as BulkEditModal } from "./components/BulkEditModal";
 export { default as AutoFillRulesModal } from "./components/AutoFillRulesModal";
 
-export const __MODULE_VERSION__ = "0.9.0";
+// 상세 모달 안 어드민 메뉴 — 행 3점 메뉴, 섹션 ⚙️ 메뉴
+export { FieldRowAdminMenu, SectionAdminMenu } from "./components/AdminMenus";
+
+export const __MODULE_VERSION__ = "0.10.0";
