@@ -10,6 +10,11 @@
  *   - 오른쪽 어드민 메뉴(행 옆 3점)도 renderAdminMenu(field) 슬롯에 위임 — 보관함의
  *     FieldRowAdminMenu 를 부모가 가져다 쓰면 됨.
  *
+ * 콜백 관례:
+ *   - onHideColumn 은 이 부품의 좌측 X 버튼(deleteMode) 에서 직접 호출.
+ *   - onDeleteColumn / onChangeType / onMoveColumn 같은 행별 동작은 이 부품에 직접 prop 으로
+ *     주지 말고, renderAdminMenu 슬롯 안의 FieldRowAdminMenu 에 직접 연결할 것.
+ *
  * AGENTS.md §5-4 cell-detail-parity 와 무관 — 이 부품은 상세 모달 전용 wrapper.
  */
 
