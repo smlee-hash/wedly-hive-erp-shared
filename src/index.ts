@@ -56,4 +56,8 @@ export type { OrderableField, DraggableFieldsSectionProps } from "./components/D
 export { SectionEditorAddModal, SectionEditorDeleteConfirm } from "./components/SectionEditorModal";
 export type { SectionKind, SectionEditorAddPayload } from "./components/SectionEditorModal";
 
-export const __MODULE_VERSION__ = "0.14.1";
+// 상세 모달 — 상위 패널 추가 모달 (memo / embed / fields / history / files)
+export { PanelEditorAddModal } from "./components/PanelEditorModal";
+export type { PanelKind, PanelEditorAddPayload } from "./components/PanelEditorModal";
+
+export const __MODULE_VERSION__ = "0.15.0";
