@@ -48,4 +48,8 @@ export { default as AutoFillRulesModal } from "./components/AutoFillRulesModal";
 // 상세 모달 안 어드민 메뉴 — 행 3점 메뉴, 섹션 ⚙️ 메뉴
 export { FieldRowAdminMenu, SectionAdminMenu } from "./components/AdminMenus";
 
-export const __MODULE_VERSION__ = "0.10.0";
+// 상세 모달 — 드래그로 컬럼 순서 바꾸는 섹션 본문 (renderRow 슬롯으로 본문 위임)
+export { DraggableFieldsSection } from "./components/DraggableFieldsSection";
+export type { OrderableField, DraggableFieldsSectionProps } from "./components/DraggableFieldsSection";
+
+export const __MODULE_VERSION__ = "0.11.0";
