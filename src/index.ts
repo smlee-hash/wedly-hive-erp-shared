@@ -28,4 +28,7 @@ export { DesktopTable } from "./components/DesktopTable";
 
 export { TopControls } from "./components/TopControls";
 
-export const __MODULE_VERSION__ = "0.5.0";
+// 표 셀 입력기 (글자·숫자·날짜) — Select 입력기는 도메인 의존성으로 각 앱이 자체 정의
+export { CellTextEditor, CellNumberEditor, CellDateEditor } from "./components/CellEditors";
+
+export const __MODULE_VERSION__ = "0.6.0";
