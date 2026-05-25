@@ -156,6 +156,8 @@ export function SectionAdminMenu({
   editMode = false,
   onShowHiddenColumns,
   hiddenCount = 0,
+  onToggleOtherSection,
+  showOtherSection = false,
 }: {
   sectionId: string;
   sectionLabel: string;
@@ -171,6 +173,9 @@ export function SectionAdminMenu({
   /** 숨김 컬럼 복원 모달 열기 */
   onShowHiddenColumns?: () => void;
   hiddenCount?: number;
+  /** "기타" 섹션 보이기/숨기기 토글 */
+  onToggleOtherSection?: () => void;
+  showOtherSection?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -314,6 +319,41 @@ export function SectionAdminMenu({
               </svg>
               컬럼 순서 초기화
             </button>
+          )}
+          {onToggleOtherSection && (
+            <>
+              <div className="px-3 py-1.5 mt-1 text-[10px] font-semibold text-wedly-muted uppercase tracking-wider border-t border-wedly-bd/60">
+                섹션 표시
+              </div>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); onToggleOtherSection(); setOpen(false); }}
+                className={cn(
+                  "w-full px-3 py-1.5 text-[12px] text-left transition flex items-center gap-2",
+                  showOtherSection
+                    ? "text-wedly-accent bg-wedly-bg-blue/40 font-semibold"
+                    : "text-wedly-t2 hover:bg-wedly-bg-blue/40 hover:text-wedly-accent"
+                )}
+                title={showOtherSection ? "기타 섹션을 숨깁니다" : "기타 섹션을 표시합니다"}
+              >
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  {showOtherSection ? (
+                    // 눈 (보임)
+                    <>
+                      <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                      <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.3" />
+                    </>
+                  ) : (
+                    // 눈 가림
+                    <>
+                      <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                      <path d="M2 2l12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </>
+                  )}
+                </svg>
+                {showOtherSection ? "기타 섹션 숨기기" : "기타 섹션 노출"}
+              </button>
+            </>
           )}
         </div>
       )}
