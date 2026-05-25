@@ -9,4 +9,7 @@ export { cn } from "./lib/cn";
 export { ColumnToggleModal } from "./components/ColumnToggleModal";
 export type { ColumnToggleColumn } from "./components/ColumnToggleModal";
 
-export const __MODULE_VERSION__ = "0.2.0";
+export { SettingsDropdown } from "./components/SettingsDropdown";
+export type { SettingsMenuItem, SettingsCustomItem } from "./components/SettingsDropdown";
+
+export const __MODULE_VERSION__ = "0.3.0";
