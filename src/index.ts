@@ -35,4 +35,7 @@ export { CellTextEditor, CellNumberEditor, CellDateEditor } from "./components/C
 export { default as BulkEditModal } from "./components/BulkEditModal";
 export { default as AutoFillRulesModal } from "./components/AutoFillRulesModal";
 
-export const __MODULE_VERSION__ = "0.7.0";
+// 상세 모달 안 입력기 (글자·숫자·날짜) — Select·MultiPerson 은 도메인 의존성으로 각 앱 정의
+export { TextEditor, NumberEditor, DateEditor } from "./components/DetailEditors";
+
+export const __MODULE_VERSION__ = "0.8.0";
