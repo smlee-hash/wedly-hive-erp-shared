@@ -52,4 +52,8 @@ export { FieldRowAdminMenu, SectionAdminMenu } from "./components/AdminMenus";
 export { DraggableFieldsSection } from "./components/DraggableFieldsSection";
 export type { OrderableField, DraggableFieldsSectionProps } from "./components/DraggableFieldsSection";
 
-export const __MODULE_VERSION__ = "0.13.0";
+// 상세 모달 — 하위 섹션 추가/삭제 모달
+export { SectionEditorAddModal, SectionEditorDeleteConfirm } from "./components/SectionEditorModal";
+export type { SectionKind, SectionEditorAddPayload } from "./components/SectionEditorModal";
+
+export const __MODULE_VERSION__ = "0.14.0";

@@ -158,6 +158,9 @@ export function SectionAdminMenu({
   hiddenCount = 0,
   onToggleOtherSection,
   showOtherSection = false,
+  onAddSection,
+  onDeleteSection,
+  canDeleteSection = false,
 }: {
   sectionId: string;
   sectionLabel: string;
@@ -176,6 +179,12 @@ export function SectionAdminMenu({
   /** "기타" 섹션 보이기/숨기기 토글 */
   onToggleOtherSection?: () => void;
   showOtherSection?: boolean;
+  /** "새 섹션 추가" 버튼 클릭 시 호출 — 각 앱이 SectionEditorAddModal 띄움 */
+  onAddSection?: () => void;
+  /** "이 섹션 삭제" 버튼 클릭 시 호출 — 각 앱이 SectionEditorDeleteConfirm 띄움 */
+  onDeleteSection?: () => void;
+  /** 이 섹션을 삭제할 수 있는지 — 기본 섹션은 false */
+  canDeleteSection?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -320,40 +329,65 @@ export function SectionAdminMenu({
               컬럼 순서 초기화
             </button>
           )}
+          {(onAddSection || onDeleteSection || onToggleOtherSection) && (
+            <div className="px-3 py-1.5 mt-1 text-[10px] font-semibold text-wedly-muted uppercase tracking-wider border-t border-wedly-bd/60">
+              섹션 관리
+            </div>
+          )}
+          {onAddSection && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onAddSection(); setOpen(false); }}
+              className="w-full px-3 py-1.5 text-[12px] text-left text-wedly-t2 hover:bg-wedly-bg-blue/40 hover:text-wedly-accent transition flex items-center gap-2"
+              title="새 하위 섹션을 추가합니다"
+            >
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
+                <path d="M8 6.5v3M6.5 8h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              새 섹션 추가
+            </button>
+          )}
           {onToggleOtherSection && (
-            <>
-              <div className="px-3 py-1.5 mt-1 text-[10px] font-semibold text-wedly-muted uppercase tracking-wider border-t border-wedly-bd/60">
-                섹션 표시
-              </div>
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); onToggleOtherSection(); setOpen(false); }}
-                className={cn(
-                  "w-full px-3 py-1.5 text-[12px] text-left transition flex items-center gap-2",
-                  showOtherSection
-                    ? "text-wedly-accent bg-wedly-bg-blue/40 font-semibold"
-                    : "text-wedly-t2 hover:bg-wedly-bg-blue/40 hover:text-wedly-accent"
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onToggleOtherSection(); setOpen(false); }}
+              className={cn(
+                "w-full px-3 py-1.5 text-[12px] text-left transition flex items-center gap-2",
+                showOtherSection
+                  ? "text-wedly-accent bg-wedly-bg-blue/40 font-semibold"
+                  : "text-wedly-t2 hover:bg-wedly-bg-blue/40 hover:text-wedly-accent"
+              )}
+              title={showOtherSection ? "기타 섹션을 숨깁니다" : "기타 섹션을 표시합니다"}
+            >
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                {showOtherSection ? (
+                  <>
+                    <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                    <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.3" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                    <path d="M2 2l12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </>
                 )}
-                title={showOtherSection ? "기타 섹션을 숨깁니다" : "기타 섹션을 표시합니다"}
-              >
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                  {showOtherSection ? (
-                    // 눈 (보임)
-                    <>
-                      <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-                      <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.3" />
-                    </>
-                  ) : (
-                    // 눈 가림
-                    <>
-                      <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-                      <path d="M2 2l12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    </>
-                  )}
-                </svg>
-                {showOtherSection ? "기타 섹션 숨기기" : "기타 섹션 노출"}
-              </button>
-            </>
+              </svg>
+              {showOtherSection ? "기타 섹션 숨기기" : "기타 섹션 노출"}
+            </button>
+          )}
+          {onDeleteSection && canDeleteSection && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onDeleteSection(); setOpen(false); }}
+              className="w-full px-3 py-1.5 text-[12px] text-left text-wedly-red hover:bg-wedly-bg-red/40 transition flex items-center gap-2"
+              title="이 섹션을 삭제합니다 (안 컬럼은 기타로 이동)"
+            >
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 5h10M5 5V3a1 1 0 011-1h4a1 1 0 011 1v2M5 5v9a1 1 0 001 1h4a1 1 0 001-1V5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              이 섹션 삭제
+            </button>
           )}
         </div>
       )}
