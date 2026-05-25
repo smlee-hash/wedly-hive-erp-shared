@@ -21,9 +21,9 @@ export type SectionEditorAddPayload = {
 
 const KIND_OPTIONS: Array<{ value: SectionKind; label: string; description: string }> = [
   { value: "fields", label: "일반 (컬럼 모음)", description: "기본정보·기타 같은 일반 정보 섹션. 컬럼을 하나씩 추가해서 채움" },
-  { value: "settlement", label: "정산 차수 카드", description: "정산정보처럼 회차별 카드로 보여 주는 섹션" },
-  { value: "tiered-contract", label: "계약 차수 카드", description: "계약정보처럼 회차별 카드로 보여 주는 섹션" },
-  { value: "tiered-refund", label: "환불 차수 카드", description: "환불정보처럼 회차별 카드로 보여 주는 섹션" },
+  // 사용자 요구 2026-05-25: 정산·계약·환불 세 종류를 "차수 카드" 하나로 통일.
+  // 내부 종류 식별은 settlement 로 두되, 사용자가 만든 섹션의 라벨로 의미 구분(어드민이 자유롭게 이름 정함).
+  { value: "settlement", label: "차수 카드", description: "회차별로 카드를 늘려가며 정보를 쌓는 섹션 (정산·계약·환불 등 모든 차수 형식)" },
   { value: "files", label: "파일", description: "파일 첨부 전용 섹션" },
   { value: "meetings", label: "미팅", description: "미팅 회차 카드 전용 섹션" },
 ];
