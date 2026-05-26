@@ -35,8 +35,8 @@ const PANEL_KIND_OPTIONS: Array<{ value: PanelKind; label: string; description: 
   { value: "memo",   label: "텍스트 메모",  description: "사업장마다 자유롭게 쓸 수 있는 긴 글 영역", supported: true },
   { value: "embed",  label: "외부 페이지",  description: "다른 웹페이지(예: 노션·구글시트)를 패널 안에 띄움. https 만 허용", supported: true },
   { value: "fields", label: "컬럼 모음",    description: "상세정보 패널처럼 하위 섹션과 컬럼들로 구성. 만든 뒤 안에서 섹션·컬럼을 추가하세요.", supported: true },
-  { value: "history",label: "히스토리",      description: "별도 코멘트·기록 영역 (예정)", supported: false },
-  { value: "files",  label: "파일 모음",    description: "별도 파일 카테고리 영역 (예정)", supported: false },
+  { value: "history",label: "히스토리",      description: "별도 코멘트·기록 영역. 패널마다 독립된 글 묶음. 만든 뒤 안에서 카테고리·코멘트 작성.", supported: true },
+  { value: "files",  label: "파일 모음",    description: "별도 파일 첨부 영역. 패널마다 독립된 파일 묶음.", supported: true },
 ];
 
 function makePanelId(): string {

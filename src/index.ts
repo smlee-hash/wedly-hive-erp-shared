@@ -60,4 +60,4 @@ export type { SectionKind, SectionEditorAddPayload } from "./components/SectionE
 export { PanelEditorAddModal, PanelManagerModal } from "./components/PanelEditorModal";
 export type { PanelKind, PanelEditorAddPayload, CustomPanelItem } from "./components/PanelEditorModal";
 
-export const __MODULE_VERSION__ = "0.16.0";
+export const __MODULE_VERSION__ = "0.17.0";
