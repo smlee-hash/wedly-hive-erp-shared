@@ -1,4 +1,4 @@
-// @wedly/hive-erp-shared — WEDLY 하이브·ERP 공용 부품 보관함
+// @wedly/ui-shared — WEDLY 공용 화면 부품 보관함 (하이브·일루아·ERP 공유)
 //
 // 사용 앱은 자체 위들리 디자인 토큰(bg-wedly-accent 등)을 globals.css 에 정의해야 합니다.
 //

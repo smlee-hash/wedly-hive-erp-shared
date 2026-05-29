@@ -1,6 +1,6 @@
-# @wedly/hive-erp-shared
+# @wedly/ui-shared
 
-WEDLY 하이브·ERP 공용 부품 보관함.
+WEDLY 공용 화면 부품 보관함 (하이브·일루아·ERP 공유).
 
 상세 모달, 세부 섹션, 표, 셀 입력기, 페이지 위쪽 컨트롤, 공통 모달, 레이아웃 등 양쪽 앱이 공유하는 모든 화면 부품을 모은다.
 
@@ -16,13 +16,13 @@ WEDLY 하이브·ERP 공용 부품 보관함.
 하이브·ERP 둘 다 `package.json` 의 의존에 로컬 경로로 추가:
 
 ```json
-"@wedly/hive-erp-shared": "file:../wedly-hive-erp-shared"
+"@wedly/ui-shared": "file:../wedly-ui-shared"
 ```
 
 또는 절대 경로:
 
 ```json
-"@wedly/hive-erp-shared": "file:/Users/00.logico.l/wedly-hive-erp-shared"
+"@wedly/ui-shared": "file:/Users/00.logico.l/wedly-ui-shared"
 ```
 
 안정 검증 끝나면 깃허브 저장소로 이전 + GitHub URL 의존으로 변경.
