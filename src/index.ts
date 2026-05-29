@@ -15,6 +15,10 @@ export * from "./lib/options";
 // 타입
 export type { ColumnDef, FormulaSpec } from "./types/columns";
 
+// 차수 카드(계약·정산·환불) 공용 로직 — 타입·계산기·파서 (모듈화 단계 13)
+// DEFAULT_FIELDS / DEFAULT_SCORECARDS 같은 도메인 기본값은 각 앱 _components/ 에 유지.
+export * from "./tiered";
+
 // 부품 — 메인 페이지 영역
 export { ColumnToggleModal } from "./components/ColumnToggleModal";
 export type { ColumnToggleColumn } from "./components/ColumnToggleModal";
@@ -60,4 +64,4 @@ export type { SectionKind, SectionEditorAddPayload } from "./components/SectionE
 export { PanelEditorAddModal, PanelManagerModal } from "./components/PanelEditorModal";
 export type { PanelKind, PanelEditorAddPayload, CustomPanelItem } from "./components/PanelEditorModal";
 
-export const __MODULE_VERSION__ = "0.17.0";
+export const __MODULE_VERSION__ = "0.18.0";
